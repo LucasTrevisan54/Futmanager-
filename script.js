@@ -1,5 +1,5 @@
 /* ================================================================
-   app.js — FootManager
+   app.js — FutManager
    Toda a lógica da aplicação em JavaScript puro (Vanilla JS).
 
    RESTRIÇÕES SEGUIDAS:
@@ -85,7 +85,7 @@ function realizarLogin() {
      Checagem simples por string literal.
      Em um sistema real, isso seria feito no servidor.
   ---------------------------------------------------------- */
-  if (usuario !== "admin" || senha !== "1234") {
+  if (usuario !== "aluno" || senha !== "fiap2025") {
     exibirErro("erro-login", "❌ Usuário ou senha incorretos.");
     return; /* Interrompe a função; não autentica. */
   }
