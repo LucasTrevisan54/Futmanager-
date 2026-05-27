@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FootManager — Cadastro de Times</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       TELA 1: LOGIN
+       Visível por padrão ao carregar a página.
+       Ocultada pelo JS após autenticação bem-sucedida.
+  ============================================================ -->
+  <div id="tela-login">
+
+    <div class="login-card">
+      <!-- Cabeçalho decorativo -->
+      <div class="login-header">
+        <span class="login-icone">⚽</span>
+        <h1 class="login-titulo">FootManager</h1>
+        <p class="login-subtitulo">Sistema de Cadastro de Times</p>
+      </div>
+
+      <!-- Área onde mensagens de erro de login são exibidas -->
+      <!-- Inicia vazia e oculta; o JS preenche e exibe quando necessário -->
+      <p id="erro-login" class="mensagem-erro oculto"></p>
+
+      <!-- Campos do formulário de login -->
+      <div class="campo-grupo">
+        <label for="input-usuario">Usuário</label>
+        <input
+          type="text"
+          id="input-usuario"
+          placeholder="Digite seu usuário"
+          autocomplete="username"
+        />
+      </div>
+
+      <div class="campo-grupo">
+        <label for="input-senha">Senha</label>
+        <input
+          type="password"
+          id="input-senha"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+        />
+      </div>
+
+      <!-- Botão que dispara a função de login no app.js -->
+      <button class="btn btn-primario btn-bloco" onclick="realizarLogin()">
+        Entrar
+      </button>
+
+      <!-- Dica de credenciais para uso acadêmico -->
+      <p class="login-dica">
+        <strong>Dica:</strong> usuário <code>admin</code> · senha <code>1234</code>
+      </p>
+    </div>
+
+  </div><!-- /tela-login -->
+
+
+  <!-- ============================================================
+       TELA 2: DASHBOARD / CRUD
+       Oculta por padrão (classe "oculto").
+       Exibida pelo JS após autenticação bem-sucedida.
+  ============================================================ -->
+  <div id="tela-dashboard" class="oculto">
+
+    <!-- Barra superior de navegação -->
+    <header class="navbar">
+      <div class="navbar-marca">
+        <span>⚽</span> FootManager
+      </div>
+      <!-- Botão Sair: dispara a função de logout no app.js -->
+      <button class="btn btn-sair" onclick="realizarLogout()">
+        ⏻ Sair
+      </button>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="dashboard-conteudo">
+
+      <!-- ----------------------------------------------------------
+           SEÇÃO DO FORMULÁRIO (Adicionar / Editar)
+      ---------------------------------------------------------- -->
+      <section class="card-formulario">
+        <h2 class="secao-titulo">
+          <!-- O JS altera este texto entre "Adicionar" e "Editar" -->
+          <span id="titulo-formulario">Adicionar Time</span>
+        </h2>
+
+        <!-- Área onde mensagens de erro do formulário são exibidas -->
+        <p id="erro-formulario" class="mensagem-erro oculto"></p>
+
+        <div class="form-linha">
+          <!-- Campo de texto principal onde o nome do time é digitado -->
+          <input
+            type="text"
+            id="input-time"
+            placeholder="Nome do time (ex: Santos FC)"
+            class="input-principal"
+          />
+
+          <!-- Botão Salvar: chama salvarTime() — adiciona ou confirma edição -->
+          <button class="btn btn-primario" onclick="salvarTime()">
+            Salvar
+          </button>
+
+          <!-- Botão Cancelar: aparece APENAS no modo de edição.
+               Oculto por padrão. O JS remove a classe "oculto" ao entrar
+               no modo de edição e a recoloca ao cancelar. -->
+          <button
+            id="btn-cancelar"
+            class="btn btn-secundario oculto"
+            onclick="cancelarEdicao()"
+          >
+            Cancelar
+          </button>
+        </div>
+      </section><!-- /card-formulario -->
+
+
+      <!-- ----------------------------------------------------------
+           SEÇÃO DA LISTA DE TIMES
+      ---------------------------------------------------------- -->
+      <section class="card-lista">
+        <div class="lista-cabecalho">
+          <h2 class="secao-titulo">Times Cadastrados</h2>
+          <!-- Contador atualizado pelo JS a cada renderização -->
+          <span id="contador-times" class="badge-contador">0 times</span>
+        </div>
+
+        <!-- Mensagem exibida quando a lista está vazia.
+             O JS alterna sua visibilidade junto com a da lista. -->
+        <p id="msg-lista-vazia" class="lista-vazia-msg">
+          Nenhum time cadastrado ainda. Adicione o primeiro acima! 🏆
+        </p>
+
+        <!-- Lista que receberá os <li> de cada time via JS.
+             O JS escreve dentro desta <ul> a cada mudança no array. -->
+        <ul id="lista-times"></ul>
+      </section><!-- /card-lista -->
+
+    </main><!-- /dashboard-conteudo -->
+  </div><!-- /tela-dashboard -->
+
+
+  <!-- app.js carregado no final do body para garantir que
+       todos os elementos HTML acima já existam no DOM. -->
+  <script src="app.js"></script>
+
+</body>
+</html>
